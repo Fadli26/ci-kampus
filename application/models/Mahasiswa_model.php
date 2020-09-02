@@ -1,6 +1,4 @@
-<?php 
-
-
+<?php
 class Mahasiswa_model extends CI_Model{
     public function getMahasiswa($id){
         $this->db->select('*');
@@ -24,6 +22,7 @@ class Mahasiswa_model extends CI_Model{
             'jurusan_id' => $this->input->post('jurusan',true)
         ];
         $this->db->insert('mahasiswa',$data);
+        return $this->db->affected_rows('mahasiswa');
     }
     public function deleteDataMahasiswa($id){
         return $this->db->delete('mahasiswa',["id" => $id]);

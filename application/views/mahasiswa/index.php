@@ -1,3 +1,7 @@
+<!-- flashdata status insert mahasiswa -->
+<?= $this->session->flashdata('insert_status') ? $this->session->flashdata('insert_status') : NULL ?>
+""<!-- enf of flashdata -->
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -27,7 +31,7 @@
                             <th>aksi</th>
                         </tr>
                     </thead>
-                    <tfoot>
+                    <!-- <tfoot>
                         <tr>
                             <th>Nim</th>
                             <th>Nama</th>
@@ -35,7 +39,7 @@
                             <th>Jurusan</th>
                             <th>aksi</th>
                         </tr>
-                    </tfoot>
+                    </tfoot> -->
                     <tbody>
                         <?php foreach($mahasiswa as $row) : ?>
                         <tr>
