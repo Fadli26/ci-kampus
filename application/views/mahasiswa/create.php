@@ -12,16 +12,12 @@
                 <div class="card-body">
                     <form action="" method="post">
                         <div class="form-group row">
-                            <label for="jurusan" class="col-sm-3 col-form-label">Jurusan</label>
+                            <label for="nim" class="col-sm-3 col-form-label">Nim</label>
                             <div class="col-sm-9">
-                                <select class="form-control" id="jurusan" name="jurusan">
-                                    <option value="" selected>choose Jurusan</option>
-                                    <?php foreach($jurusan as $row): ?>
-                                    <option value="<?= $row["id"]; ?>"><?= $row["jurusan"]; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <input type="text" class="form-control" id="nim" name="nim"
+                                    value="<?= set_value('nim'); ?>">
                                 <small id="emailHelp"
-                                    class="form-text text-danger pl-3"><?= form_error('jurusan'); ?></small>
+                                    class="form-text text-danger pl-3"><?= form_error('nim'); ?></small>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -34,16 +30,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="nim" class="col-sm-3 col-form-label">Nim</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="nim" name="nim"
-                                    value="<?= set_value('nim'); ?>">
-                                <small id="emailHelp"
-                                    class="form-text text-danger pl-3"><?= form_error('nim'); ?></small>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-3 col-form-label">email</label>
+                            <label for="email" class="col-sm-3 col-form-label">Email</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="email" name="email"
                                     value="<?= set_value('email'); ?>">
@@ -51,7 +38,19 @@
                                     class="form-text text-danger pl-3"><?= form_error('email'); ?></small>
                             </div>
                         </div>
-
+                        <div class="form-group row">
+                            <label for="jurusan" class="col-sm-3 col-form-label">Jurusan</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="jurusan" name="jurusan"<?= set_value('jurusan'); ?>>
+                                    <option value="" selected hidden>choose Jurusan</option>
+                                    <?php foreach($jurusan as $row): ?>
+                                    <option value="<?= $row["id"]; ?>"><?= $row["jurusan"]; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <small id="emailHelp"
+                                    class="form-text text-danger pl-3"><?= form_error('jurusan'); ?></small>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <div class="col-sm-8 d-flex justify-content-center">
                                 <button type="submit" class="btn btn-primary">Create</button>

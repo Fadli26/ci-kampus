@@ -1,6 +1,6 @@
 <!-- flashdata status insert mahasiswa -->
 <?= $this->session->flashdata('insert_status') ? $this->session->flashdata('insert_status') : NULL ?>
-""<!-- enf of flashdata -->
+<!-- enf of flashdata -->
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
