@@ -26,6 +26,18 @@ class Mahasiswa_model extends CI_Model{
         return $this->db->affected_rows('mahasiswa');
     }
 
+    public function updateDataMahasiswa() {
+      $data =  [
+          'nim' => $this->input->post('nim',true),
+          'nama' => $this->input->post('nama',true),
+          'email' => $this->input->post('email',true),
+          'jurusan_id' => $this->input->post('jurusan',true)
+      ];
+      $where['id'] = $this->input->post('id', true);
+      $this->db->update('mahasiswa', $data, $where);
+      return $this->db->affected_rows('mahasiswa');
+    }
+
     public function deleteDataMahasiswa($id){
       $where['id'] = $id;
       $this->db->delete('mahasiswa',$where);

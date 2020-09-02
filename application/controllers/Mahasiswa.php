@@ -14,6 +14,7 @@ class Mahasiswa extends CI_Controller
     {
         $data["judul"] = "Mahasiswa";
         $data["mahasiswa"] = $this->mahasiswa->getMahasiswa(null);
+        $data["jurusan"] = $this->db->get('jurusan')->result_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar');
         $this->load->view('templates/navbar');
@@ -26,8 +27,13 @@ class Mahasiswa extends CI_Controller
         // set rules
         $this->form_validation->set_rules('jurusan', 'Jurusan', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required|min_length[5]');
-        $this->form_validation->set_rules('nim', 'Nim', 'required|is_unique[mahasiswa.nim]|max_length[8]|min_length[5]|numeric');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[mahasiswa.email]');
+
+        // SEMENTARA MENGHILANGKAN is_unique PADA VALIDATION DIBAWAH, KARNA MENYEBABKAN UPDATE TIDAK BEKERJA
+        // $this->form_validation->set_rules('nim', 'Nim', 'required|is_unique[mahasiswa.nim]|max_length[8]|min_length[5]|numeric');
+        // $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[mahasiswa.email]');
+
+        $this->form_validation->set_rules('nim', 'Nim', 'required|max_length[8]|min_length[5]|numeric');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
     }
 
     public function createMahasiswa()
@@ -39,23 +45,23 @@ class Mahasiswa extends CI_Controller
         $this->_formVal();
 
         if ($this->form_validation->run()) {
-          $result = $this->mahasiswa->addDataMahasiswa();
-          if ($result > 0) {
-              $this->session->set_flashdata(
-              'insert_status',
-              "<div class='alert alert-success' role='alert'>
+            $result = $this->mahasiswa->addDataMahasiswa();
+            if ($result > 0) {
+                $this->session->set_flashdata(
+                  'insert_status',
+                  "<div class='alert alert-success' role='alert'>
               Berhasil menambah data mahasiswa
           </div>"
-          );
-          } else {
-              $this->session->set_flashdata(
-              'insert_status',
-              "<div class='alert alert-danger' role='alert'>
+              );
+            } else {
+                $this->session->set_flashdata(
+                  'insert_status',
+                  "<div class='alert alert-danger' role='alert'>
                 Gagal menambah data mahasiswa
               </div>"
-          );
-          }
-          redirect('mahasiswa');
+              );
+            }
+            redirect('mahasiswa');
         }
 
         // akan otomatis dieksekusi ketika form_validation tidak run
@@ -93,23 +99,57 @@ class Mahasiswa extends CI_Controller
         }
     }
 
+    public function updateMahasiswa($id)
+    {
+        $this->_formVal();
+
+        if ($this->form_validation->run()) {
+            $result = $this->mahasiswa->updateDataMahasiswa();
+            if ($result > 0) {
+                $this->session->set_flashdata(
+                        'insert_status',
+                        "<div class='alert alert-success' role='alert'>
+                    Berhasil menambah data mahasiswa
+                </div>"
+                    );
+            } else {
+                $this->session->set_flashdata(
+                        'insert_status',
+                        "<div class='alert alert-danger' role='alert'>
+                      Gagal menambah data mahasiswa
+                    </div>"
+                    );
+            }
+            redirect('mahasiswa');
+        }
+
+        $data['mahasiswa'] = $this->mahasiswa->getMahasiswaById($id);
+        $data["jurusan"] = $this->db->get('jurusan')->result_array();
+        $data['judul'] = 'Update Mahasiswa';
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/navbar');
+        $this->load->view('mahasiswa/update', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function deleteMahasiswa($id)
     {
         $result = $this->mahasiswa->deleteDataMahasiswa($id);
         if ($result > 0) {
             $this->session->set_flashdata(
-            'insert_status',
-            "<div class='alert alert-success' role='alert'>
+                'insert_status',
+                "<div class='alert alert-success' role='alert'>
             Berhasil menghapus data mahasiswa
         </div>"
-        );
+            );
         } else {
             $this->session->set_flashdata(
-            'insert_status',
-            "<div class='alert alert-danger' role='alert'>
+                'insert_status',
+                "<div class='alert alert-danger' role='alert'>
               Gagal menghapus data mahasiswa
             </div>"
-        );
+            );
         }
         redirect('mahasiswa');
     }
