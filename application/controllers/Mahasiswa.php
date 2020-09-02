@@ -50,9 +50,9 @@ class Mahasiswa extends CI_Controller
           } else {
               $this->session->set_flashdata(
               'insert_status',
-              "<div class='alert alert-success' role='alert'>
-            Gagal menambah data mahasiswa
-          </div>"
+              "<div class='alert alert-danger' role='alert'>
+                Gagal menambah data mahasiswa
+              </div>"
           );
           }
           redirect('mahasiswa');
@@ -95,7 +95,22 @@ class Mahasiswa extends CI_Controller
 
     public function deleteMahasiswa($id)
     {
-        $this->mahasiswa->deleteDataMahasiswa($id);
+        $result = $this->mahasiswa->deleteDataMahasiswa($id);
+        if ($result > 0) {
+            $this->session->set_flashdata(
+            'insert_status',
+            "<div class='alert alert-success' role='alert'>
+            Berhasil menghapus data mahasiswa
+        </div>"
+        );
+        } else {
+            $this->session->set_flashdata(
+            'insert_status',
+            "<div class='alert alert-danger' role='alert'>
+              Gagal menghapus data mahasiswa
+            </div>"
+        );
+        }
         redirect('mahasiswa');
     }
 

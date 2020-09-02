@@ -14,6 +14,7 @@ class Mahasiswa_model extends CI_Model{
     public function getMahasiswaById($id){
         return $this->db->get_where('mahasiswa',["id" => $id])->row_array();
     }
+
     public function addDataMahasiswa(){
         $data =  [
             'nim' => $this->input->post('nim',true),
@@ -24,9 +25,13 @@ class Mahasiswa_model extends CI_Model{
         $this->db->insert('mahasiswa',$data);
         return $this->db->affected_rows('mahasiswa');
     }
+
     public function deleteDataMahasiswa($id){
-        return $this->db->delete('mahasiswa',["id" => $id]);
+      $where['id'] = $id;
+      $this->db->delete('mahasiswa',$where);
+      return $this->db->affected_rows('mahasiswa');
     }
+
     public function getMatkul($id){
         $this->db->select('*');
         $this->db->from('jurusan');
