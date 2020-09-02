@@ -109,14 +109,14 @@ class Mahasiswa extends CI_Controller
                 $this->session->set_flashdata(
                         'insert_status',
                         "<div class='alert alert-success' role='alert'>
-                    Berhasil menambah data mahasiswa
+                    Berhasil mengubah data mahasiswa
                 </div>"
                     );
             } else {
                 $this->session->set_flashdata(
                         'insert_status',
                         "<div class='alert alert-danger' role='alert'>
-                      Gagal menambah data mahasiswa
+                      Gagal mengubah data mahasiswa
                     </div>"
                     );
             }
