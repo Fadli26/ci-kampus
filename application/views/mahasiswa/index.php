@@ -55,7 +55,7 @@
                                     onclick="return confirm('apakah anda yakin');">delete</a>
                                 <a href="<?= base_url('mahasiswa/updateMahasiswa/') . $row["id"]; ?>"
                                     class="btn btn-warning btn-sm">edit</a>
-                                <a href="<?= base_url('mahasiswa/addMatkulMhs/') . $row["id"]; ?>"
+                                <a href="<?= base_url('matkul/addMatkulMhs/') . $row["id"]; ?>"
                                     class="btn btn-primary btn-sm">mata
                                     kuliah</a>
                             </td>

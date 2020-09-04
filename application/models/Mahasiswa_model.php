@@ -59,10 +59,10 @@ class Mahasiswa_model extends CI_Model{
         return $this->db->get()->result_array();
 
     }
-    public function addMatkul($nim){
+    public function addMatkul($nim, $row_matkul){
         $data = [
             "nim" => $nim,
-            "matkul_id" => $this->input->post('matkul')
+            "matkul_id" => $row_matkul
         ];
         $this->db->insert('semester',$data);
     }
