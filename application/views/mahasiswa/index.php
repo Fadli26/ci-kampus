@@ -1,3 +1,7 @@
+<!-- flashdata status insert mahasiswa -->
+<?= $this->session->flashdata('insert_status') ? $this->session->flashdata('insert_status') : null ?>
+<!-- enf of flashdata -->
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -27,7 +31,7 @@
                             <th>aksi</th>
                         </tr>
                     </thead>
-                    <tfoot>
+                    <!-- <tfoot>
                         <tr>
                             <th>Nim</th>
                             <th>Nama</th>
@@ -35,9 +39,9 @@
                             <th>Jurusan</th>
                             <th>aksi</th>
                         </tr>
-                    </tfoot>
+                    </tfoot> -->
                     <tbody>
-                        <?php foreach($mahasiswa as $row) : ?>
+                        <?php foreach ($mahasiswa as $row) : ?>
                         <tr>
                             <td><?= $row["nim"] ?></td>
                             <td><?= $row["nama"] ?></td>
@@ -49,6 +53,8 @@
                                 <a href="<?= base_url('mahasiswa/deleteMahasiswa/') . $row["id"];  ?>"
                                     class="btn btn-danger btn-sm"
                                     onclick="return confirm('apakah anda yakin');">delete</a>
+                                <a href="<?= base_url('mahasiswa/updateMahasiswa/') . $row["id"]; ?>"
+                                    class="btn btn-warning btn-sm">edit</a>
                                 <a href="<?= base_url('mahasiswa/addMatkulMhs/') . $row["id"]; ?>"
                                     class="btn btn-primary btn-sm">mata
                                     kuliah</a>

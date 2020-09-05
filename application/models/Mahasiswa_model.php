@@ -1,6 +1,4 @@
-<?php 
-
-
+<?php
 class Mahasiswa_model extends CI_Model{
     public function getMahasiswa($id){
         $this->db->select('*');
@@ -16,6 +14,7 @@ class Mahasiswa_model extends CI_Model{
     public function getMahasiswaById($id){
         return $this->db->get_where('mahasiswa',["id" => $id])->row_array();
     }
+
     public function addDataMahasiswa(){
         $data =  [
             'nim' => $this->input->post('nim',true),
@@ -24,10 +23,27 @@ class Mahasiswa_model extends CI_Model{
             'jurusan_id' => $this->input->post('jurusan',true)
         ];
         $this->db->insert('mahasiswa',$data);
+        return $this->db->affected_rows('mahasiswa');
     }
+
+    public function updateDataMahasiswa() {
+      $data =  [
+          'nim' => $this->input->post('nim',true),
+          'nama' => $this->input->post('nama',true),
+          'email' => $this->input->post('email',true),
+          'jurusan_id' => $this->input->post('jurusan',true)
+      ];
+      $where['id'] = $this->input->post('id', true);
+      $this->db->update('mahasiswa', $data, $where);
+      return $this->db->affected_rows('mahasiswa');
+    }
+
     public function deleteDataMahasiswa($id){
-        return $this->db->delete('mahasiswa',["id" => $id]);
+      $where['id'] = $id;
+      $this->db->delete('mahasiswa',$where);
+      return $this->db->affected_rows('mahasiswa');
     }
+
     public function getMatkul($id){
         $this->db->select('*');
         $this->db->from('jurusan');

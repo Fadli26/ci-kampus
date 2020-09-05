@@ -14,8 +14,10 @@
                         <div class="form-group row">
                             <label for="nim" class="col-sm-3 col-form-label">Nim</label>
                             <div class="col-sm-9">
+                                <input type="text" class="form-control" name="id" hidden
+                                    value="<?= $mahasiswa['id']; ?>">
                                 <input type="text" class="form-control" id="nim" name="nim"
-                                    value="<?= set_value('nim'); ?>">
+                                    value="<?= $mahasiswa['nim']; ?>">
                                 <small id="emailHelp"
                                     class="form-text text-danger pl-3"><?= form_error('nim'); ?></small>
                             </div>
@@ -24,7 +26,7 @@
                             <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="nama" name="nama"
-                                    value="<?= set_value('nama'); ?>">
+                                    value="<?= $mahasiswa['nama']; ?>">
                                 <small id="emailHelp"
                                     class="form-text text-danger pl-3"><?= form_error('nama'); ?></small>
                             </div>
@@ -33,7 +35,7 @@
                             <label for="email" class="col-sm-3 col-form-label">Email</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="email" name="email"
-                                    value="<?= set_value('email'); ?>">
+                                    value="<?= $mahasiswa['email']; ?>">
                                 <small id="emailHelp"
                                     class="form-text text-danger pl-3"><?= form_error('email'); ?></small>
                             </div>
@@ -44,7 +46,8 @@
                                 <select class="form-control" id="jurusan" name="jurusan"<?= set_value('jurusan'); ?>>
                                     <option value="" selected hidden>choose Jurusan</option>
                                     <?php foreach($jurusan as $row): ?>
-                                    <option value="<?= $row["id"]; ?>"><?= $row["jurusan"]; ?></option>
+                                    <option <?= $mahasiswa['jurusan_id'] == $row['id'] ? 'selected' : NULL ?>
+                                      value="<?= $row["id"]; ?>"><?= $row["jurusan"]; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <small id="emailHelp"
@@ -53,7 +56,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-8 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </div>
 
