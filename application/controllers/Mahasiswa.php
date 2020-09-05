@@ -8,6 +8,7 @@ class Mahasiswa extends CI_Controller
         parent::__construct();
         $this->load->model('Mahasiswa_model', 'mahasiswa');
         $this->load->library(['form_validation', 'session']);
+        $this->load->helper(array('auto_check_input'));
     }
 
     public function index()
@@ -70,33 +71,6 @@ class Mahasiswa extends CI_Controller
         $this->load->view('templates/navbar');
         $this->load->view('mahasiswa/create');
         $this->load->view('templates/footer');
-    }
-
-    public function addMatkulMhs($id)
-    {
-        $data["judul"] = "Add Mata Kuliah Mahasiswa";
-        $data["mahasiswa"] = $this->mahasiswa->getMahasiswaById($id);
-        $data["matkul"] = $this->mahasiswa->getMatkul($data["mahasiswa"]["jurusan_id"]);
-        $this->form_validation->set_rules('matkul', 'Mata Kuliah', 'required');
-        if ($this->form_validation->run() === false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar');
-            $this->load->view('templates/navbar');
-            $this->load->view('mahasiswa/addMatkul', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $nim = $data["mahasiswa"]["nim"];
-            $matkul = $this->input->post('matkul');
-            $semester = $this->db->get_where('semester', ["nim" => $nim, "matkul_id" => $matkul])->row_array();
-            if ($semester) {
-                // sementara ganti dengan alert bootstrap
-                echo "<script>alert('gagal');</script>";
-            } else {
-                $this->mahasiswa->addMatkul($nim);
-                redirect('mahasiswa/detailMhs/' . $data["mahasiswa"]["id"]);
-            }
-            // var_dump($data["semester"]);
-        }
     }
 
     public function updateMahasiswa($id)
@@ -165,4 +139,7 @@ class Mahasiswa extends CI_Controller
         $this->load->view('mahasiswa/detailMhs', $data);
         $this->load->view('templates/footer');
     }
+
+
+        
 }

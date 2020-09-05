@@ -17,13 +17,18 @@
                                 name="nim">
                         </div>
                         <div class="form-group">
-                            <label for="matkul">Mata Kuliah</label>
-                            <select class="form-control" id="matkul" name="matkul">
-                                <option value="" selected>choose mata Kuliah</option>
-                                <?php foreach($matkul as $row) : ?>
-                                <option value="<?= $row["id"]; ?>"><?= $row["matkul"]; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <!-- Menampilkan daftar matkul dalam bentuk checkbox -->
+                            <?php foreach($matkul as $row_matkul) : ?>
+
+                              <input type="checkbox" id="<?= $row_matkul['id']; ?>"
+                              name="matkul[]" value="<?= $row_matkul['id']; ?>"
+                              <?php foreach($semester as $row_semester) : ?>
+                                <?= auto_check_input($row_semester['id'], $row_matkul['id']) ?>
+                              <?php endforeach; ?>>
+
+                              <label for="<?= $row_matkul['id']; ?>"><?= $row_matkul['matkul']; ?></label><br>
+
+                            <?php endforeach; ?>
                             <small id="emailHelp" class="form-text text-danger"><?= form_error('matkul'); ?></small>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
