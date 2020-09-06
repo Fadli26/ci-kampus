@@ -67,4 +67,9 @@ class Mahasiswa_model extends CI_Model{
         $this->db->insert('semester',$data);
     }
 
+    public function deleteAllMatkul($nim) {
+      $where['nim'] = $nim;
+      $this->db->delete('semester', $where);
+    }
+
 }
