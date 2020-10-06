@@ -20,18 +20,19 @@ class Matkul extends CI_Controller{
       $data["semester"] = $this->mahasiswa->getMatkulMhs("$nim");
 
       $this->form_validation->set_rules('matkul[]', 'Mata Kuliah', 'required');
+
       if ($this->form_validation->run()) {
         $nim = $data["mahasiswa"]["nim"];
         $matkul = $this->input->post('matkul');
+
+        //memastikan data matkul dihapus dahulu
+        $this->mahasiswa->deleteAllMatkul($nim);
+
+        // mengisi setiap matkul ke dalam 1 row
         foreach ($matkul as $row_matkul) {
-          $semester = $this->db->get_where('semester', ["nim" => $nim, "matkul_id" => $row_matkul])->row_array();
-          if ($semester) {
-              // sementara ganti dengan alert bootstrap
-              echo "<script>alert('gagal');</script>";
-            } else {
-              $this->mahasiswa->addMatkul($nim, $row_matkul);
-          }
+            $this->mahasiswa->addMatkul($nim, $row_matkul);
         }
+
         redirect('mahasiswa/detailMhs/' . $data["mahasiswa"]["id"]);
       }
 
